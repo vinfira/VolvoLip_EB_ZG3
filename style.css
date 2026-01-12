@@ -1,5 +1,5 @@
 /* =========================
-  my css part
+  my css part zg3
 ========================= */
 *,
 *::before,
@@ -30,7 +30,7 @@ img {
 :root {
   --container: 1120px;
   --pad: 16px;
-  --radius: 8px;
+  --radius: 4px;
   --bg: ffffff;
   --muted: #fafafa; 
   --hero-bg: #000;
@@ -50,14 +50,16 @@ img {
 }
 
 /* =========================
-   TOP BAR
+   TOP BAR sticky change
 ========================= */
 .top-bar {
-  position: relative;
+  position: sticky;
+  top: 0;
   height: 58px;
   background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
   overflow: visible;
+  z-index: 100; /* Damit die Bar über allem anderen bleibt */
 }
 
 .top-bar-inner {
@@ -360,6 +362,35 @@ img {
   }
 }
 
+/* =========================
+   Image overlay felder
+========================= */
+.image-frame {
+  position: relative; /* Wichtig für Positionierung */
+}
+
+.image-overlay-text {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #111;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+@media (min-width: 900px) {
+  .image-overlay-text {
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    font-size: 15px;
+  }
+}
 
 /* =========================
    METRICS kasten white
@@ -514,6 +545,23 @@ img {
 .section-gallery .image-tube {
   grid-column: 1 / -1;
 }
+/* Hover-Effekt für Gallery Bilder */
+.section-gallery .image-frame {
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.section-gallery .image-frame img,
+.section-gallery .image-frame svg {
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+@media (hover: hover) {
+  .section-gallery .image-frame:hover img,
+  .section-gallery .image-frame:hover svg {
+    transform: scale(1.05);
+  }
+}
 
 @media (min-width: 720px) {
   .gallery-grid {
@@ -643,7 +691,7 @@ img {
   margin: 0 0 40px; /* passt abstand an*/
   font-weight: 550;
   font-size: 18px;
-  line-height: 1.6;
+  line-height: 1.25;
 }
 
 .section-variant .image-frame {
